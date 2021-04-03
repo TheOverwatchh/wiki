@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-color: white;
+    background-color: black;
 }
 
 code {
@@ -33,6 +33,6 @@ textarea {
     padding: 20px;
 }
 
-.sidebar h2 {
+.sidebar h2  {
     margin-top: 5px;
 }
