@@ -7,7 +7,7 @@
 {% block body %}
     <h2>Create a New Entry!</h2>
 
-    <form style="width: 80%; margin-top: 2%;">     
+    <form action="{% url 'save' %}" method="POST" style="width: 80%; margin-top: 2%;">     
         {% csrf_token %}
         <div class="form-group">
           <label for="title">Entry Title</label>
