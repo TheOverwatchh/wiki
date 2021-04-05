@@ -1,0 +1,11 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title%}
+    Wrong Entry 
+{% endblock %}
+
+{% block body %}
+    <h1>OOPS!</h1>
+    <p>I'm afraid <u>{{ entryTitle }}</u> entry does not exist.</p>
+    <p>But you can <a href="{% url 'new' %}">Create</a> it!</p>
+{% endblock %}
