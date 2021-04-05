@@ -52,11 +52,13 @@ def save(request):
         entry_text = request.POST['text']
         entries = util.list_entries()
         if entry_title in entries:
-            return render(request, "encyclopedia/entry_exists.html")
+            return render(request, "encyclopedia/entry_exists.html", {
+                "entryTitle": entry_title
+            })
         else:
             util.save_entry(entry_title, entry_text)  
             html = convert_to_HTML(entry_title) 
-            return render(request, "encyclopedia/entry.html", {
+            return render(request, "encyclopedia/entry.html", {          
                 "entry": html,
                 "entryTitle": entry_title
             })
@@ -66,12 +68,14 @@ def save(request):
 def entry(request, entry_name):
     html = convert_to_HTML(entry_name)
     if html is None:
-        return None
-    #     return render(request, "encyclopedia/wrong_entry.html", {
-    #         "entryTitle": entry_name
-    # })
+         return render(request, "encyclopedia/wrong_entry.html", {
+             "entryTitle": entry_name
+     })
     else:
         return render(request, "encyclopedia/entry.html", {
             "entry": html,
             "entryTitle": entry_name
         })
+
+
+        # next feature: implement the edit entry function.
