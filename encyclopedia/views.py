@@ -47,7 +47,6 @@ def newEntry(request):
 
 def save(request): 
     if request.method == 'POST':
-
         entry_title = request.POST['title']
         entry_text = request.POST['text']
         entries = util.list_entries()
@@ -66,7 +65,8 @@ def save(request):
 
 
 def entry(request, entry_name):
-    html = convert_to_HTML(entry_name)
+    entry_name2 = str(entry_name)
+    html = convert_to_HTML(entry_name2)
     if html is None:
          return render(request, "encyclopedia/wrong_entry.html", {
              "entryTitle": entry_name
@@ -77,5 +77,14 @@ def entry(request, entry_name):
             "entryTitle": entry_name
         })
 
+
+def edit(request, entry_name):
+    # entry_name2 = str(entry_name)
+    # html = convert_to_HTML(entry_name2)
+    content = util.get_entry(entry_name)
+    return render(request, "encyclopedia/edit_entry.html", {
+        "entry": content,
+        "entryTitle": entry_name
+    })
 
         # next feature: implement the edit entry function.

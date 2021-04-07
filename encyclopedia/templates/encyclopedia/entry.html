@@ -7,4 +7,5 @@
 {% block body %}
     <h1>{{ entryTitle }}</h1>
     {{ entry | safe }}
+    <a class="btn btn-secondary" href="{{ entryTitle }}/edit">Edit</a>
 {% endblock %}
