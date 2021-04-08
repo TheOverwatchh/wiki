@@ -68,7 +68,7 @@ def save_edit(request):
         entry_title = request.POST['title']
         entry_text = request.POST['text']
         entries = util.list_entries()
-        entries.remove(request.POST['title']) 
+        entries.remove(entry_title) 
         util.save_entry(entry_title, entry_text)
         html = convert_to_HTML(entry_title)
         return render(request, "encyclopedia/entry.html", {
