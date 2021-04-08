@@ -6,11 +6,8 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("wiki/<str:entry_name>", views.entry, name="entry"),
     path("wiki/<str:entry_name>/edit", views.edit, name="edit_entry"),
-    # path("wiki/CSS", views.cssPage, name="CSS"),
-    # path("wiki/Django", views.djangoPage, name="Django"),
-    # path("wiki/Git", views.gitPage, name="Git"),
-    # path("wiki/HTML", views.htmlPage, name="HTML"),
-    # path("wiki/Python", views.pythonPage, name="Python"),
+    path("random", views.rand, name="rand"),
+    path("save_edit", views.save_edit, name="save_edit"),
     path("new", views.newEntry, name="new"),
     path("save", views.save, name="save")
 ]
