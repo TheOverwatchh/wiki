@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import markdown
 from . import util
+import random
 
 def convert_to_HTML(entry_name):
     md = markdown.Markdown()
@@ -10,33 +11,6 @@ def convert_to_HTML(entry_name):
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
-        "entries": util.list_entries()
-    })
-
-def cssPage(request):
-    return render(request, "encyclopedia/CSS.html", {
-        "entries": util.list_entries()
-    })    
-
-def htmlPage(request):
-    return render(request, "encyclopedia/HTML.html", {
-        "entries": util.list_entries()
-    })
-
-def djangoPage(request):
-    return render(request, "encyclopedia/Django.html", {
-        "entries": util.list_entries()
-    })
-
-
-def gitPage(request):
-    return render(request, "encyclopedia/Git.html", {
-        "entries": util.list_entries()
-    })
-
-
-def pythonPage(request):
-    return render(request, "encyclopedia/Python.html", {
         "entries": util.list_entries()
     })
 
@@ -86,5 +60,31 @@ def edit(request, entry_name):
         "entry": content,
         "entryTitle": entry_name
     })
+    
 
-        # next feature: implement the edit entry function.
+
+def save_edit(request):
+    if request.method == 'POST':
+        entry_title = request.POST['title']
+        entry_text = request.POST['text']
+        entries = util.list_entries()
+        entries.remove(request.POST['title']) 
+        util.save_entry(entry_title, entry_text)
+        html = convert_to_HTML(entry_title)
+        return render(request, "encyclopedia/entry.html", {
+            "entry": html,
+            "entryTitle": entry_title
+        })
+
+
+def rand(request):
+    arr = util.list_entries()
+    entry_title = random.choice(arr)
+    html = convert_to_HTML(entry_title)
+    return render(request, "encyclopedia/entry.html", {
+        "entry": html,
+        "entryTitle": entry_title
+    })
+
+        # previous feature: implement the edit entry function.
+        # next feature: implement the search funtion.
