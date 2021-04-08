@@ -86,5 +86,22 @@ def rand(request):
         "entryTitle": entry_title
     })
 
-        # previous feature: implement the edit entry function.
-        # next feature: implement the search funtion.
+def search(request):
+    if request.method == 'POST':
+        requisition = request.POST['q']
+        html = convert_to_HTML(requisition)
+        entries = util.list_entries()
+        if requisition in entries:
+            return render(request, "encyclopedia/entry.html", {
+                "entry": html,
+                "entryTitle": requisition
+            }) 
+        else:
+            search_pages = []
+            for entry in entries:
+                if requisition in entry:
+                    search_pages.append(entry)    
+            return render(request, "encyclopedia/search.html", {
+                    "entryTitle": requisition,
+                    "entries": search_pages
+                })  
